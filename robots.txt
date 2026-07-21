@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://professional-site-ashen.vercel.app/sitemap.xml

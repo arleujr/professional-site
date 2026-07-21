@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Arleu Júnior</title>
+  <rect width="64" height="64" rx="14" fill="#07100c"/>
+  <path d="M19 19 8 32l11 13" fill="none" stroke="#3ecf8e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m45 19 11 13-11 13" fill="none" stroke="#3ecf8e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m38 13-12 38" fill="none" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round"/>
+</svg>

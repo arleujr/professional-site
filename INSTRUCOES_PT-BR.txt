@@ -1,0 +1,13 @@
+SITE PROFISSIONAL — VERSÃO 1.1.0
+
+1. Publique todo o conteúdo desta pasta na raiz do repositório professional-site.
+2. O site funciona sem npm install e sem etapa de build.
+3. Para testar apenas as páginas localmente:
+
+   python -m http.server 5500
+
+   Abra http://localhost:5500
+
+4. Para testar o formulário de contato, configure as variáveis de .env.example e execute pelo ambiente da Vercel.
+5. Os vídeos de demonstração são opcionais. Caso estejam disponíveis, coloque-os em assets/video/ com os nomes documentados no README da pasta.
+6. README.md é a documentação principal em inglês; README.pt-BR.md contém a versão em português.

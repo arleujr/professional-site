@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Arleu J&uacute;nior | Desenvolvimento Backend e Dados</title>
+<meta content="Graduando em Agronomia na UFV com foco em desenvolvimento backend e dados. Projetos com Python, FastAPI, PostgreSQL, processamento ass&iacute;ncrono e AgTech." name="description"/>
+<meta content="Arleu J&uacute;nior" name="author"/>
+<meta content="#07100c" name="theme-color"/>
+<link href="https://professional-site-ashen.vercel.app/pt-br/" rel="canonical"/><link href="https://professional-site-ashen.vercel.app/" hreflang="x-default" rel="alternate"/><link href="https://professional-site-ashen.vercel.app/pt-br/" hreflang="pt-BR" rel="alternate"/><link href="https://professional-site-ashen.vercel.app/" hreflang="en" rel="alternate"/>
+<link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="Arleu J&uacute;nior | Desenvolvimento Backend e Dados" property="og:title"/>
+<meta content="APIs, processamento de dados e automa&ccedil;&atilde;o aplicados a desafios acad&ecirc;micos, agr&iacute;colas e operacionais." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://professional-site-ashen.vercel.app/pt-br/" property="og:url"/>
+<meta content="https://professional-site-ashen.vercel.app/assets/img/backgroundinitialpage.jpg" property="og:image"/>
+<meta content="Campo agr&iacute;cola ao nascer do sol" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Arleu Júnior",
+  "url": "https://professional-site-ashen.vercel.app/pt-br/",
+  "image": "https://professional-site-ashen.vercel.app/assets/img/arleubernadao.jpg",
+  "email": "mailto:arleujr30@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Viçosa",
+    "addressRegion": "Minas Gerais",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://github.com/arleujr",
+    "https://www.linkedin.com/in/arleujunior/"
+  ],
+  "knowsAbout": [
+    "Backend development",
+    "Python",
+    "FastAPI",
+    "REST APIs",
+    "SQL",
+    "PostgreSQL",
+    "PostGIS",
+    "Redis",
+    "Celery",
+    "Data processing",
+    "Data validation",
+    "Docker",
+    "Automated testing",
+    "Rust",
+    "MQTT",
+    "Agricultural technology"
+  ],
+  "inLanguage": "pt-BR",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Federal University of Viçosa"
+  }
+}</script>
+<script>
+   document.documentElement.classList.replace('no-js', 'js');
+  </script>
+<script defer="" src="../assets/js/script.js">
+</script>
+<meta content="pt_BR" property="og:locale"/><meta content="en_US" property="og:locale:alternate"/>
+</head>
+<body data-locale="pt-BR">
+<a class="skip-link" href="#main-content">
+   Ir para o conte&uacute;do principal
+  </a>
+<header aria-label="Navega&ccedil;&atilde;o principal" class="index-floating-header">
+<a aria-label="P&aacute;gina inicial de Arleu J&uacute;nior" class="index-floating-brand" href="#home">
+<span>
+     &lt;
+    </span>
+    ARLEU_J&Uacute;NIOR
+    <span>
+     /&gt;
+    </span>
+</a>
+<nav aria-label="Links r&aacute;pidos" class="index-floating-nav"><a href="#home">In&iacute;cio</a><a href="#about">Sobre mim</a><a href="#projects">Projetos</a><a href="#experience">Experi&ecirc;ncia</a><a href="resume.html">Curr&iacute;culo</a><a href="cover-letter.html">Carta de apresenta&ccedil;&atilde;o</a><a href="#contact">Contato</a><a aria-label="Open English version" class="language-switch" href="../index.html">EN</a></nav>
+</header>
+<aside aria-label="Navega&ccedil;&atilde;o pelas se&ccedil;&otilde;es" class="side-rail"><a aria-label="P&aacute;gina inicial de Arleu J&uacute;nior" class="rail-brand" href="#home">AJ</a><nav class="rail-nav"><a aria-current="page" aria-label="In&iacute;cio" class="rail-link is-active" data-label="In&iacute;cio" data-section-link="home" href="#home"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5h-5.2v-6.4H8.7V21H3.5a.5.5 0 0 1-.5-.5z"></path></svg></a><a aria-label="Sobre mim" class="rail-link" data-label="Sobre mim" data-section-link="about" href="#about"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg></a><a aria-label="Projetos" class="rail-link" data-label="Projetos" data-section-link="projects" href="#projects"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m8 9-4 3 4 3m8-6 4 3-4 3M14 5l-4 14"></path></svg></a><a aria-label="Experi&ecirc;ncia" class="rail-link" data-label="Experi&ecirc;ncia" data-section-link="experience" href="#experience"><svg aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="6"></rect><path d="M9 6V4h6v2M3 11h18M10 14h4"></path></svg></a><a aria-label="Compet&ecirc;ncias t&eacute;cnicas" class="rail-link" data-label="Compet&ecirc;ncias t&eacute;cnicas" data-section-link="contribution" href="#contribution"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 19V9m8 10V5m8 14v-7"></path><path d="M2 21h20"></path></svg></a><a aria-label="Contato" class="rail-link" data-label="Contato" data-section-link="contact" href="#contact"><svg aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="18" x="3" y="5"></rect><path d="m4 7 8 6 8-6"></path></svg></a></nav><div class="rail-bottom"><div class="rail-socials"><a aria-label="Perfil no GitHub" data-label="GitHub" href="https://github.com/arleujr" rel="noreferrer" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 2.8a9.3 9.3 0 0 0-2.9 18.1c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.3-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 7 8.2c-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.3 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 1.9v2.6c0 .3.2.6.7.5A9.3 9.3 0 0 0 12 2.8Z"></path></svg></a><a aria-label="Perfil no LinkedIn" data-label="LinkedIn" href="https://www.linkedin.com/in/arleujunior/" rel="noreferrer" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6.2 8.3H3.1V21h3.1ZM4.6 3a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM21 13.7c0-3.8-2-5.6-4.7-5.6-2.2 0-3.1 1.2-3.7 2v-1.7H9.5V21h3.1v-6.2c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21H20Z"></path></svg></a><a aria-label="Contato pelo WhatsApp" data-label="WhatsApp" href="https://wa.me/5532999512050?text=Ol%C3%A1%20Arleu%2C%20encontrei%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade%20profissional." rel="noreferrer" target="_blank"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.4l1.3-4.7a8.5 8.5 0 1 1 16.2-4Z"></path><path d="M8.2 7.5c.2-.4.4-.4.7-.4h.4c.2 0 .4 0 .5.4l.7 1.8c.1.3.1.5-.1.7l-.5.7c-.2.2-.3.4-.1.7.5.9 1.2 1.7 2.1 2.2.3.2.5.2.7-.1l.8-1c.2-.3.4-.3.7-.2l1.8.8c.3.1.5.2.5.4 0 .2-.1 1.4-.8 2-.6.6-1.4.8-2.3.6-1.2-.3-2.8-.9-4.6-2.5-1.4-1.3-2.4-2.8-2.7-4-.3-1 .1-1.7.4-2.1Z"></path></svg></a></div><a aria-label="Open English version" class="rail-language" data-label="English" href="../index.html">EN</a></div></aside>
+<header class="mobile-header" id="mobile-header"><a aria-label="P&aacute;gina inicial de Arleu J&uacute;nior" class="mobile-brand" href="#home">&lt;ARLEU_J&Uacute;NIOR/&gt;</a><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu de navega&ccedil;&atilde;o" class="menu-toggle" id="menu-toggle" type="button"><span></span><span></span><span></span></button></header>
+<nav aria-label="Navega&ccedil;&atilde;o m&oacute;vel" class="mobile-menu" id="mobile-menu"><a href="#home">In&iacute;cio</a><a href="#about">Sobre mim</a><a href="#projects">Projetos</a><a href="#experience">Experi&ecirc;ncia</a><a href="#contribution">Compet&ecirc;ncias t&eacute;cnicas</a><a href="#contact">Contato</a><a href="resume.html">Curr&iacute;culo</a><a href="cover-letter.html">Carta de apresenta&ccedil;&atilde;o</a><a href="https://github.com/arleujr">GitHub</a><a href="https://www.linkedin.com/in/arleujunior/">LinkedIn</a><a href="https://wa.me/5532999512050?text=Ol%C3%A1%20Arleu%2C%20encontrei%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade%20profissional.">WhatsApp</a><a href="../index.html">English</a></nav>
+<main class="site-main" id="main-content">
+<section class="hero" data-section="home" id="home">
+<div aria-hidden="true" class="hero-background">
+</div>
+<div aria-hidden="true" class="hero-glow">
+</div>
+<div class="content-shell hero-grid">
+<div class="hero-copy reveal">
+<p class="eyebrow">
+       AGRONOMIA &middot; BACKEND &middot; DADOS
+      </p>
+<p class="hero-intro">
+       Oi, eu sou o
+      </p>
+<h1>
+       Arleu J&uacute;nior
+      </h1>
+<p aria-live="polite" class="typing-line" data-phrases='["Desenvolvimento de APIs", "Processamento e valida&ccedil;&atilde;o de dados", "Automa&ccedil;&atilde;o de processos"]' id="typing-text">
+       Desenvolvimento de APIs 
+      </p>
+<p class="hero-summary">
+       Sou estudante de Agronomia e estou construindo experi&ecirc;ncia pr&aacute;tica em backend e dados.
+      </p>
+<div class="availability">
+<span aria-hidden="true" class="status-dot">
+</span>
+       Aberto a oportunidades de est&aacute;gio e n&iacute;vel j&uacute;nior
+      </div>
+<div class="hero-actions">
+<a class="button button-primary" href="#projects">
+        Explorar projetos
+       </a>
+<a class="button button-secondary" href="resume.html">
+        Ver curr&iacute;culo
+       </a>
+<a class="button button-ghost" href="#contact">
+        Entrar em contato
+       </a>
+</div>
+<ul aria-label="Tecnologias principais" class="hero-stack">
+<li>
+        Python
+       </li>
+<li>
+        FastAPI
+       </li>
+<li>
+        SQL
+       </li>
+<li>
+        PostgreSQL
+       </li>
+<li>
+        Docker
+       </li>
+</ul>
+</div>
+<div class="hero-visual reveal">
+<div class="portrait-wrap">
+<div aria-hidden="true" class="portrait-accent">
+</div>
+<img alt="Arleu J&uacute;nior" fetchpriority="high" height="960" src="../assets/img/arleubernadao.jpg" width="760"/>
+</div>
+<div class="profile-note profile-note-top">
+<span>
+        Foco atual
+       </span>
+<strong>
+        Backend e Dados
+       </strong>
+<small>
+        Aplicados &agrave; agricultura
+       </small>
+</div>
+<div class="profile-note profile-note-bottom">
+<span>
+        Graduando em Agronomia
+       </span>
+<strong>
+        Universidade Federal de Vi&ccedil;osa
+       </strong>
+<small>
+        Vi&ccedil;osa, Brasil
+       </small>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="hero-marker">
+<span>
+</span>
+</div>
+</section><section class="section section-muted" data-section="about" id="about">
+<div class="content-shell">
+<div class="section-heading reveal">
+<p class="eyebrow">
+       SOBRE MIM
+      </p>
+<h2>
+       Tecnologia aplicada &agrave; melhoria de processos.
+      </h2>
+<p>
+       Minha trajet&oacute;ria me ajuda a compreender o processo antes de pensar na solu&ccedil;&atilde;o t&eacute;cnica.
+      </p>
+</div>
+<div class="about-layout">
+<figure class="about-photo reveal">
+<img alt="Arleu J&uacute;nior em um ambiente agr&iacute;cola" height="1200" loading="lazy" src="../assets/img/arleusocial.jpg" width="900"/>
+<figcaption aria-label="Perfis profissionais" class="about-socials">
+<a aria-label="Perfil no LinkedIn" class="about-social-link about-social-link-fill" href="https://www.linkedin.com/in/arleujunior/" rel="noreferrer" target="_blank" title="LinkedIn">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M6.2 8.3H3.1V21h3.1ZM4.6 3a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM21 13.7c0-3.8-2-5.6-4.7-5.6-2.2 0-3.1 1.2-3.7 2v-1.7H9.5V21h3.1v-6.2c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21H20Z">
+</path>
+</svg>
+</a>
+<a aria-label="Perfil no GitHub" class="about-social-link about-social-link-fill" href="https://github.com/arleujr" rel="noreferrer" target="_blank" title="GitHub">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M12 2.8a9.3 9.3 0 0 0-2.9 18.1c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.3-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 7 8.2c-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.3 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 1.9v2.6c0 .3.2.6.7.5A9.3 9.3 0 0 0 12 2.8Z">
+</path>
+</svg>
+</a>
+<a aria-label="Contato pelo WhatsApp" class="about-social-link about-social-link-stroke" href="https://wa.me/5532999512050?text=Ol%C3%A1%20Arleu%2C%20encontrei%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade%20profissional." rel="noreferrer" target="_blank" title="WhatsApp">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.4l1.3-4.7a8.5 8.5 0 1 1 16.2-4Z">
+</path>
+<path d="M8.2 7.5c.2-.4.4-.4.7-.4h.4c.2 0 .4 0 .5.4l.7 1.8c.1.3.1.5-.1.7l-.5.7c-.2.2-.3.4-.1.7.5.9 1.2 1.7 2.1 2.2.3.2.5.2.7-.1l.8-1c.2-.3.4-.3.7-.2l1.8.8c.3.1.5.2.5.4 0 .2-.1 1.4-.8 2-.6.6-1.4.8-2.3.6-1.2-.3-2.8-.9-4.6-2.5-1.4-1.3-2.4-2.8-2.7-4-.3-1 .1-1.7.4-2.1Z">
+</path>
+</svg>
+</a>
+</figcaption>
+</figure>
+<div class="about-copy reveal">
+<p>
+        Arleu J&uacute;nior
+       </p>
+<p>
+  Estou no &uacute;ltimo ano de Agronomia na Universidade Federal de Vi&ccedil;osa e, ao longo da minha trajet&oacute;ria acad&ecirc;mica e profissional, ficou clara a import&acirc;ncia de coletar, organizar e interpretar dados. A agricultura de precis&atilde;o mostra como informa&ccedil;&otilde;es de diferentes fontes podem ser combinadas para acompanhar a lavoura e apoiar decis&otilde;es de manejo.
+  </p>
+<p>
+       A integra&ccedil;&atilde;o entre tecnologia e opera&ccedil;&atilde;o me mostrou que a programa&ccedil;&atilde;o pode ser uma ferramenta para melhorar processos. Passei a me interessar por solu&ccedil;&otilde;es capazes de integrar dados, automatizar rotinas e reduzir tarefas manuais, principalmente em processos que dependem de muitos registros, confer&ecirc;ncias e atualiza&ccedil;&otilde;es manuais.
+       </p>
+<p>
+Atualmente desenvolvo projetos com Python, FastAPI, SQL e PostgreSQL, utilizando tamb&eacute;m Docker, Git, testes automatizados e integra&ccedil;&atilde;o cont&iacute;nua. Tenho direcionado meus estudos para desenvolvimento backend, APIs REST, modelagem relacional e processamento de dados.
+</p>
+<p>Busco uma oportunidade de est&aacute;gio ou posi&ccedil;&atilde;o j&uacute;nior em backend ou dados, em um ambiente com prazos, entregas e revis&atilde;o t&eacute;cnica. Quero aplicar o que venho desenvolvendo em sistemas utilizados por outras pessoas e ampliar minha experi&ecirc;ncia profissional na &aacute;rea.</p>
+</div>
+</div>
+</div>
+</section><section class="section" data-section="projects" id="projects">
+<div class="content-shell">
+<div class="section-heading reveal">
+<p class="eyebrow">
+       PROJETOS EM DESTAQUE
+      </p>
+<h2>Meus principais projetos</h2>
+<p>Projetos de backend, dados e automa&ccedil;&atilde;o com implementa&ccedil;&atilde;o documentada e reposit&oacute;rios p&uacute;blicos.</p>
+</div>
+<div class="projects-carousel-shell">
+<button aria-label="Mostrar projeto anterior" class="projects-carousel-button" data-projects-previous="" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="m15 18-6-6 6-6">
+</path>
+</svg>
+</button>
+<div aria-label="Projetos em destaque" aria-roledescription="carousel" class="featured-projects" id="featured-projects-carousel" tabindex="0">
+<article class="case-study reveal">
+<div class="case-visual project-demo-shell">
+<video aria-label="Demonstra&ccedil;&atilde;o do fluxo de cat&aacute;logo e monitoramento do AgriSentry Cotton" class="project-demo" controls="" loop="" muted="" playsinline="" poster="../assets/img/project-agrisentry-poster.png" preload="metadata">
+<source src="../assets/video/agrisentry-demo.mp4" type="video/mp4"/>
+Seu navegador n&atilde;o oferece suporte a v&iacute;deos incorporados.
+</video>
+<button aria-label="Expandir demonstra&ccedil;&atilde;o do projeto" class="project-video-expand" data-video-expand="" title="Abrir v&iacute;deo em tela cheia" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg>
+</button>
+</div>
+<div class="case-copy">
+<h3>AgriSentry Cotton</h3>
+<p class="project-summary">Plataforma em desenvolvimento para organizar informa&ccedil;&otilde;es de manejo, monitoramento e cat&aacute;logo relacionadas &agrave; cultura do algod&atilde;o.</p>
+<ul class="case-list project-highlights"><li>API REST ass&iacute;ncrona com FastAPI e SQLAlchemy</li><li>Persist&ecirc;ncia com PostgreSQL e PostGIS</li><li>Autentica&ccedil;&atilde;o JWT e contexto por organiza&ccedil;&atilde;o</li><li>Tarefas em segundo plano com Redis e Celery</li><li>Fluxo de cat&aacute;logo com staging, valida&ccedil;&atilde;o, normaliza&ccedil;&atilde;o, deduplica&ccedil;&atilde;o, revis&atilde;o humana e publica&ccedil;&atilde;o</li><li>Testes do backend com Pytest e do frontend com Vitest</li></ul>
+<div class="case-actions"><a class="button button-primary" href="https://github.com/arleujr/agrisentry-cotton" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></div>
+</div>
+</article>
+<article class="case-study case-study-reverse reveal">
+<div class="case-visual project-demo-shell">
+<video aria-label="Demonstra&ccedil;&atilde;o da ingest&atilde;o, revis&atilde;o de metadados e exporta&ccedil;&atilde;o do RefEngine" class="project-demo" controls="" loop="" muted="" playsinline="" poster="../assets/img/project-refengine-poster.png" preload="metadata">
+<source src="../assets/video/refengine-demo.mp4" type="video/mp4"/>
+Seu navegador n&atilde;o oferece suporte a v&iacute;deos incorporados.
+</video>
+<button aria-label="Expandir demonstra&ccedil;&atilde;o do projeto" class="project-video-expand" data-video-expand="" title="Abrir v&iacute;deo em tela cheia" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg>
+</button>
+</div>
+<div class="case-copy">
+<h3>RefEngine</h3>
+<p class="project-summary">Aplica&ccedil;&atilde;o local para ingerir fontes acad&ecirc;micas, revisar metadados bibliogr&aacute;ficos e gerar refer&ecirc;ncias conforme as normas adotadas pela UFV.</p>
+<ul class="case-list project-highlights"><li>Ingest&atilde;o de PDF, RIS e BibTeX</li><li>OCR para documentos sem texto extra&iacute;vel</li><li>Valida&ccedil;&atilde;o de campos obrigat&oacute;rios e identifica&ccedil;&atilde;o de conflitos</li><li>Revis&atilde;o de metadados por endpoints PATCH</li><li>API com FastAPI, interface em React e testes automatizados</li><li>Execu&ccedil;&atilde;o offline e exporta&ccedil;&atilde;o formatada</li></ul>
+<div class="case-actions"><a class="button button-primary" href="https://github.com/arleujr/RefEngine" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></div>
+</div>
+</article>
+<article class="case-study reveal">
+<div class="case-visual project-demo-shell">
+<video aria-label="Demonstra&ccedil;&atilde;o do preenchimento, revis&atilde;o e gera&ccedil;&atilde;o de documento no tccBuilder" class="project-demo" controls="" loop="" muted="" playsinline="" poster="../assets/img/project-tccbuilder-poster.png" preload="metadata">
+<source src="../assets/video/tccbuilder-demo.mp4" type="video/mp4"/>
+Seu navegador n&atilde;o oferece suporte a v&iacute;deos incorporados.
+</video>
+<button aria-label="Expandir demonstra&ccedil;&atilde;o do projeto" class="project-video-expand" data-video-expand="" title="Abrir v&iacute;deo em tela cheia" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg>
+</button>
+</div>
+<div class="case-copy">
+<h3>tccBuilder</h3>
+<p class="project-summary">Aplica&ccedil;&atilde;o local para preencher, validar e gerar um trabalho de conclus&atilde;o de curso a partir do modelo utilizado na Agronomia da UFV.</p>
+<ul class="case-list project-highlights"><li>Interface em React com formul&aacute;rios controlados</li><li>Conte&uacute;do organizado em se&ccedil;&otilde;es e campos edit&aacute;veis</li><li>Valida&ccedil;&atilde;o de informa&ccedil;&otilde;es obrigat&oacute;rias</li><li>Estados de revis&atilde;o e tratamento de erros</li><li>Execu&ccedil;&atilde;o local com Node.js</li><li>Gera&ccedil;&atilde;o do documento final a partir do modelo da UFV</li></ul>
+<div class="case-actions"><a class="button button-primary" href="https://github.com/arleujr/tccBuilder" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></div>
+</div>
+</article>
+</div>
+<button aria-label="Mostrar pr&oacute;ximo projeto" class="projects-carousel-button" data-projects-next="" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="m9 18 6-6-6-6">
+</path>
+</svg>
+</button>
+</div>
+<div class="secondary-projects-heading reveal">
+<p class="eyebrow">
+       OUTROS PROJETOS
+      </p>
+<h3>Projetos adicionais de backend e ferramentas t&eacute;cnicas</h3></div>
+<div aria-label="Filtrar projetos adicionais" class="project-filters reveal" role="group">
+<button class="filter-button is-active" data-filter="all" type="button">Todos</button>
+<button class="filter-button" data-filter="backend" type="button">Backend</button>
+<button class="filter-button" data-filter="data" type="button">Dados</button>
+<button class="filter-button" data-filter="tools" type="button">Ferramentas</button>
+</div>
+<div class="projects-grid"><article class="project-card reveal" data-category="backend"><div class="project-meta"><span class="project-status">Gateway ass&iacute;ncrono</span><span>Telemetria</span></div><h3>AgriSentry IoT Gateway</h3><p>Gateway para ingest&atilde;o de telemetria por MQTT e HTTP REST, com persist&ecirc;ncia em PostgreSQL, retentativas com backoff e integra&ccedil;&atilde;o com servi&ccedil;os FastAPI.</p><div class="project-tech"><span>Rust</span><span>Actix Web</span><span>SQLx</span><span>PostgreSQL</span><span>MQTT</span><span>Docker</span></div><a class="text-link" href="https://github.com/arleujr/agrisentry-iot-gateway" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></article><article class="project-card reveal" data-category="data"><div class="project-meta"><span class="project-status">Servi&ccedil;o backend</span><span>Qualidade de dados</span></div><h3>AgriSentry Core</h3><p>Servi&ccedil;o para processar telemetria e aplicar regras configur&aacute;veis de valida&ccedil;&atilde;o, qualidade de dados e identifica&ccedil;&atilde;o de anomalias.</p><div class="project-tech"><span>Python</span><span>FastAPI</span><span>SQLAlchemy</span><span>AsyncIO</span><span>PostgreSQL</span><span>Pytest</span></div><a class="text-link" href="https://github.com/arleujr/agrisentry-core" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></article><article class="project-card reveal" data-category="tools"><div class="project-meta"><span class="project-status">Ferramenta de linha de comando</span><span>Seguran&ccedil;a no desenvolvimento</span></div><h3>DevGuard Core</h3><p>CLI para detectar credenciais e tokens em arquivos de c&oacute;digo por meio de express&otilde;es regulares e an&aacute;lise de entropia, com suporte a pre-commit e relat&oacute;rios JSON.</p><div class="project-tech"><span>Rust</span><span>Regex</span><span>Serde</span><span>Git Hooks</span><span>CI/CD</span></div><a class="text-link" href="https://github.com/arleujr/dev-guard-core" rel="noreferrer" target="_blank">Ver reposit&oacute;rio</a></article></div>
+</div>
+</section><section class="section section-muted" data-section="experience" id="experience">
+<div class="content-shell">
+<div class="section-heading reveal">
+<p class="eyebrow">
+       EXPERI&Ecirc;NCIA
+      </p>
+<h2>
+       Experi&ecirc;ncia profissional
+      </h2>
+<p>
+Essas experi&ecirc;ncias me deram contato com rotinas operacionais, protocolos, registros, prazos e trabalho em equipe.
+</p>
+</div>
+<div class="experience-accordion">
+<details class="experience-item reveal" open="">
+<summary>
+<span class="experience-summary-main">
+<strong>
+          Pif Paf Alimentos
+         </strong>
+<small>
+          Estagi&aacute;rio em Produ&ccedil;&atilde;o Av&iacute;cola
+         </small>
+</span>
+<span class="experience-summary-period">
+         2025&ndash;2026
+        </span>
+<span aria-hidden="true" class="experience-summary-icon">
+         +
+        </span>
+</summary>
+<div class="experience-detail">
+<div class="experience-detail-copy">
+<ul>
+<li>Atuei em uma rotina corporativa orientada por prazos, resultados, treinamentos e cumprimento rigoroso de protocolos operacionais e de biosseguridade.
+</li>
+<li>
+           Atuei junto &agrave; equipe t&eacute;cnica de campo nas rotinas di&aacute;rias de produ&ccedil;&atilde;o de frangos de corte, acompanhando biosseguridade, prepara&ccedil;&atilde;o dos avi&aacute;rios e condi&ccedil;&otilde;es dos lotes.
+          </li>
+<li>
+           Apoiei coletas biol&oacute;gicas, necropsias de campo e avalia&ccedil;&otilde;es visuais pr&eacute;-abate seguindo protocolos operacionais estabelecidos.
+          </li>
+<li>
+           Observei desafios recorrentes relacionados a registros operacionais, rastreabilidade e organiza&ccedil;&atilde;o das informa&ccedil;&otilde;es de campo.
+          </li>
+</ul>
+</div>
+<img alt="Arleu J&uacute;nior durante atividades de produ&ccedil;&atilde;o av&iacute;cola" height="750" loading="lazy" src="../assets/img/arleupifpaf.jpg" width="1000"/>
+</div>
+</details>
+<details class="experience-item reveal">
+<summary>
+<span class="experience-summary-main">
+<strong>
+          ADWA Cannabis
+         </strong>
+<small>
+          Estagi&aacute;rio em Opera&ccedil;&otilde;es de Campo
+         </small>
+</span>
+<span class="experience-summary-period">
+         2022&ndash;2025
+        </span>
+<span aria-hidden="true" class="experience-summary-icon">
+         +
+        </span>
+</summary>
+<div class="experience-detail">
+<div class="experience-detail-copy">
+<ul>
+<li>
+           Registrei vari&aacute;veis ambientais e da cultura em instala&ccedil;&otilde;es de cultivo protegido e ambientes de viveiro.
+          </li>
+<li>
+           Apoiei atividades de propaga&ccedil;&atilde;o, aduba&ccedil;&atilde;o, manejo fitossanit&aacute;rio, colheita e p&oacute;s-colheita.
+          </li>
+<li>
+           Organizei registros de produ&ccedil;&atilde;o para melhorar a rastreabilidade em rotinas operacionais recorrentes.
+          </li>
+<li>
+           Auxiliei na coleta de dados e em atividades de campo para pesquisa agron&ocirc;mica aplicada.
+          </li>
+</ul>
+</div>
+<img alt="Arleu J&uacute;nior durante atividades de cultivo controlado" height="750" loading="lazy" src="../assets/img/arleuadwa.jpg" width="1000"/>
+</div>
+</details>
+<details class="experience-item reveal">
+<summary>
+<span class="experience-summary-main">
+<strong>
+          GeCotton &middot; Cotton Study Group
+         </strong>
+<small>
+          Assessor de Eventos
+         </small>
+</span>
+<span class="experience-summary-period">
+         2025&ndash;Atual
+        </span>
+<span aria-hidden="true" class="experience-summary-icon">
+         +
+        </span>
+</summary>
+<div class="experience-detail">
+<div class="experience-detail-copy">
+<ul>
+<li>Auxilio no planejamento das atividades do grupo, incluindo programa&ccedil;&atilde;o, calend&aacute;rio, contato com palestrantes e organiza&ccedil;&atilde;o de agendas t&eacute;cnicas.</li>
+<li>Apoio a organiza&ccedil;&atilde;o de eventos t&eacute;cnicos e cient&iacute;ficos sobre algod&atilde;o, m&aacute;quinas agr&iacute;colas e transfer&ecirc;ncia de tecnologia.</li>
+<li>Colaboro na prepara&ccedil;&atilde;o de materiais e atividades envolvendo pesquisadores, produtores, professores e empresas.</li>
+<li>Auxilio em atividades de campo e na coleta de informa&ccedil;&otilde;es t&eacute;cnicas do grupo.</li>
+</ul>
+</div>
+<img alt="Arleu J&uacute;nior durante uma atividade t&eacute;cnica do GeCotton" height="750" loading="lazy" src="../assets/img/arleugecotton.jpg" width="1000"/>
+</div>
+</details>
+<details class="experience-item reveal">
+<summary>
+<span class="experience-summary-main">
+<strong>
+          BraIN e Phy Lab &middot; UFV
+         </strong>
+<small>
+          Estagi&aacute;rio de Laborat&oacute;rio
+         </small>
+</span>
+<span class="experience-summary-period">
+         2025&ndash;2026
+        </span>
+<span aria-hidden="true" class="experience-summary-icon">
+         +
+        </span>
+</summary>
+<div class="experience-detail">
+<div class="experience-detail-copy">
+<ul>
+<li>
+           Mantive e monitorei col&ocirc;nias de insetos utilizadas em experimentos controlados.
+          </li>
+<li>
+           Apoiei ensaios com bioinseticidas seguindo protocolos laboratoriais padronizados.
+          </li>
+<li>
+           Organizei registros experimentais e auxiliei na interpreta&ccedil;&atilde;o dos resultados.
+          </li>
+<li>
+           Apoiei a prepara&ccedil;&atilde;o de materiais e atividades de comunica&ccedil;&atilde;o cient&iacute;fica relacionadas aos trabalhos do laborat&oacute;rio.
+          </li>
+</ul>
+</div>
+<img alt="Arleu J&uacute;nior durante atividades laboratoriais na UFV" height="750" loading="lazy" src="../assets/img/arleubrainphy.jpg" width="1000"/>
+</div>
+</details>
+</div>
+</div>
+</section><section class="section" data-section="contribution" id="contribution">
+<div class="content-shell">
+<div class="section-heading reveal">
+<p class="eyebrow">COMPET&Ecirc;NCIAS T&Eacute;CNICAS</p>
+<h2>Tecnologias que utilizo nos projetos.</h2>
+<p>Organizo minhas compet&ecirc;ncias de acordo com as atividades que venho praticando em desenvolvimento backend, processamento de dados e automa&ccedil;&atilde;o.</p>
+</div>
+<div class="contribution-grid competencies-grid">
+<article class="contribution-card competency-card reveal">
+<div class="capability-heading">
+<div aria-hidden="true" class="contribution-icon">
+<svg viewbox="0 0 24 24"><path d="m8 9-4 3 4 3m8-6 4 3-4 3M14 5l-4 14"></path></svg>
+</div>
+<h3>Backend e APIs</h3>
+</div>
+<p>Desenvolvimento de APIs REST, autentica&ccedil;&atilde;o, persist&ecirc;ncia ass&iacute;ncrona e regras de aplica&ccedil;&atilde;o.</p>
+<ul><li>Python, FastAPI, SQLAlchemy e Pydantic</li><li>APIs REST, OpenAPI e JWT</li><li>AsyncIO, Redis e Celery</li><li>Pytest e pytest-asyncio</li></ul>
+</article>
+<article class="contribution-card competency-card reveal">
+<div class="capability-heading">
+<div aria-hidden="true" class="contribution-icon">
+<svg viewbox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"></path></svg>
+</div>
+<h3>Bancos e dados</h3>
+</div>
+<p>Modelagem, valida&ccedil;&atilde;o e processamento de dados relacionais, geoespaciais e documentais.</p>
+<ul><li>PostgreSQL, PostGIS e modelagem relacional</li><li>SQL e Pandas</li><li>Valida&ccedil;&atilde;o, normaliza&ccedil;&atilde;o e deduplica&ccedil;&atilde;o</li><li>PDF, RIS, BibTeX e OCR</li></ul>
+</article>
+<article class="contribution-card competency-card reveal">
+<div class="capability-heading">
+<div aria-hidden="true" class="contribution-icon">
+<svg viewbox="0 0 24 24"><path d="M4 5h16v14H4z"></path><path d="M4 9h16M8 7h.01M11 7h.01"></path></svg>
+</div>
+<h3>Integra&ccedil;&atilde;o e desenvolvimento</h3>
+</div>
+<p>Tecnologias utilizadas para integrar interfaces, servi&ccedil;os, telemetria e automa&ccedil;&otilde;es de qualidade.</p>
+<ul><li>Vue 3, TypeScript, React e Node.js</li><li>Docker, Git e GitHub</li><li>GitHub Actions e CI/CD</li><li>Rust, Actix Web, SQLx e MQTT</li></ul>
+</article>
+<article class="contribution-card competency-card reveal">
+<div class="capability-heading">
+<div aria-hidden="true" class="contribution-icon">
+<svg viewbox="0 0 24 24"><path d="M12 3v18M3 12h18"></path><path d="m7 7 5-4 5 4M7 17l5 4 5-4"></path></svg>
+</div>
+<h3>Em aprendizado</h3>
+</div>
+<p>Conte&uacute;dos que estou aprofundando sem apresent&aacute;-los como dom&iacute;nio profissional.</p>
+<ul><li>PySpark e fundamentos de pipelines</li><li>Fundamentos de implanta&ccedil;&atilde;o em nuvem</li><li>Fundamentos de MongoDB</li><li>Desempenho e observabilidade de bancos de dados</li></ul>
+</article>
+</div>
+</div>
+</section><section class="section contact-section" data-section="contact" id="contact">
+<div class="content-shell">
+<div class="section-heading reveal">
+<p class="eyebrow">
+       CONTATO
+      </p>
+<h2>
+       Vamos conversar sobre oportunidades, projetos e desafios t&eacute;cnicos.
+      </h2>
+<p>
+       Estou aberto a oportunidades de est&aacute;gio e n&iacute;vel j&uacute;nior em desenvolvimento backend, dados e solu&ccedil;&otilde;es web, com interesse especial em equipes remotas e internacionais.
+      </p>
+</div>
+<div class="contact-layout">
+<div class="contact-channels reveal">
+<div class="contact-intro">
+<h3>
+         Contato direto
+        </h3>
+<p>
+         Escolha o canal mais conveniente. O WhatsApp abre com uma mensagem pronta que pode ser editada antes do envio.
+        </p>
+</div>
+<a class="contact-channel" href="https://wa.me/5532999512050?text=Ol%C3%A1%20Arleu%2C%20encontrei%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade%20profissional." rel="noreferrer" target="_blank">
+<span aria-hidden="true" class="channel-icon">
+<svg viewbox="0 0 24 24">
+<path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.4l1.3-4.7a8.5 8.5 0 1 1 16.2-4Z">
+</path>
+<path d="M8.2 7.5c.2-.4.4-.4.7-.4h.4c.2 0 .4 0 .5.4l.7 1.8c.1.3.1.5-.1.7l-.5.7c-.2.2-.3.4-.1.7.5.9 1.2 1.7 2.1 2.2.3.2.5.2.7-.1l.8-1c.2-.3.4-.3.7-.2l1.8.8c.3.1.5.2.5.4 0 .2-.1 1.4-.8 2-.6.6-1.4.8-2.3.6-1.2-.3-2.8-.9-4.6-2.5-1.4-1.3-2.4-2.8-2.7-4-.3-1 .1-1.7.4-2.1Z">
+</path>
+</svg>
+</span>
+<span>
+<strong>
+          WhatsApp
+         </strong>
+<small>
+          Iniciar uma conversa direta
+         </small>
+</span>
+</a>
+<a class="contact-channel" href="mailto:arleujr30@gmail.com">
+<span aria-hidden="true" class="channel-icon">
+<svg viewbox="0 0 24 24">
+<rect height="14" rx="2" width="18" x="3" y="5">
+</rect>
+<path d="m4 7 8 6 8-6">
+</path>
+</svg>
+</span>
+<span>
+<strong>
+          Email
+         </strong>
+<small>
+          arleujr30@gmail.com
+         </small>
+</span>
+</a>
+<a class="contact-channel" href="https://www.linkedin.com/in/arleujunior/" rel="noreferrer" target="_blank">
+<span aria-hidden="true" class="channel-icon">
+<svg viewbox="0 0 24 24">
+<path d="M6.2 8.3H3.1V21h3.1ZM4.6 3a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM21 13.7c0-3.8-2-5.6-4.7-5.6-2.2 0-3.1 1.2-3.7 2v-1.7H9.5V21h3.1v-6.2c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3V21H20Z">
+</path>
+</svg>
+</span>
+<span>
+<strong>
+          LinkedIn
+         </strong>
+<small>
+          Perfil profissional e atualiza&ccedil;&otilde;es
+         </small>
+</span>
+</a>
+<a class="contact-channel" href="https://github.com/arleujr" rel="noreferrer" target="_blank">
+<span aria-hidden="true" class="channel-icon">
+<svg viewbox="0 0 24 24">
+<path d="M12 2.8a9.3 9.3 0 0 0-2.9 18.1c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.3-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 7 8.2c-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.3 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 1.9v2.6c0 .3.2.6.7.5A9.3 9.3 0 0 0 12 2.8Z">
+</path>
+</svg>
+</span>
+<span>
+<strong>
+          GitHub
+         </strong>
+<small>
+          Reposit&oacute;rios e trabalhos t&eacute;cnicos
+         </small>
+</span>
+</a>
+<div class="contact-location">
+<span>
+         Localizado em Vi&ccedil;osa, Minas Gerais, Brasil
+        </span>
+<span>
+         Dispon&iacute;vel para oportunidades remotas e h&iacute;bridas
+        </span>
+</div>
+</div>
+<form class="contact-form reveal" id="contact-form" novalidate=""><input name="language" type="hidden" value="pt-BR"/>
+<div class="form-heading">
+<h3>
+         Enviar uma mensagem
+        </h3>
+<p>
+         As mensagens enviadas pelo formul&aacute;rio chegam diretamente ao meu e-mail.
+        </p>
+</div>
+<div class="form-grid">
+<label>
+<span>
+          Nome
+         </span>
+<input autocomplete="name" maxlength="80" name="name" required="" type="text"/>
+</label>
+<label>
+<span>
+          Email
+         </span>
+<input autocomplete="email" maxlength="120" name="email" required="" type="email"/>
+</label>
+</div>
+<label>
+<span>
+         Empresa ou organiza&ccedil;&atilde;o
+        </span>
+<input autocomplete="organization" maxlength="120" name="company" type="text"/>
+</label>
+<label>
+<span>
+         Assunto
+        </span>
+<input maxlength="140" name="subject" required="" type="text"/>
+</label>
+<label>
+<span>
+         Mensagem
+        </span>
+<textarea maxlength="3000" name="message" required="" rows="7"></textarea>
+</label>
+<label aria-hidden="true" class="honeypot">
+<span>
+         Site
+        </span>
+<input autocomplete="off" name="website" tabindex="-1" type="text"/>
+</label>
+<input id="form-started-at" name="startedAt" type="hidden"/>
+<div class="form-footer">
+<button class="button button-primary" id="contact-submit" type="submit">
+         Enviar mensagem
+        </button>
+<p aria-live="polite" class="form-status" id="form-status" role="status">
+</p>
+</div>
+<p class="form-fallback">
+        Caso o formul&aacute;rio esteja indispon&iacute;vel, use o WhatsApp ou o e-mail nas op&ccedil;&otilde;es de contato direto.
+       </p>
+</form>
+</div>
+</div>
+</section></main>
+<footer class="site-footer">
+<div class="content-shell footer-grid">
+<a class="footer-brand" href="#home">
+<span>
+      &lt;
+     </span>
+     ARLEU_J&Uacute;NIOR
+     <span>
+      /&gt;
+     </span>
+</a>
+<p>
+     Backend e dados aplicados &agrave; agricultura.
+    </p>
+<div class="footer-links">
+<a href="resume.html">
+      Curr&iacute;culo
+     </a>
+<a href="cover-letter.html">
+      Carta de apresenta&ccedil;&atilde;o
+     </a>
+<a href="https://github.com/arleujr" rel="noreferrer" target="_blank">
+      GitHub
+     </a>
+</div>
+<p>
+     &copy;
+     <span data-current-year="">
+      2026
+     </span>
+     Arleu J&uacute;nior.
+    </p>
+</div>
+</footer>
+<div aria-live="polite" class="toast" id="toast" role="status">
+</div>
+</body>
+</html>
