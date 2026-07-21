@@ -1,147 +1,145 @@
-const jsonHeaders = {
-  'Content-Type': 'application/json; charset=utf-8',
-  'Cache-Control': 'no-store',
-};
+import { buildEmailPayload } from '../src/contact/email-template.js';
+import { messages } from '../src/contact/messages.js';
+import { validateContactPayload } from '../src/contact/validation.js';
 
-function jsonResponse(payload, status = 200) {
-  return new Response(JSON.stringify(payload), { status, headers: jsonHeaders });
+const MAX_BODY_BYTES = 16_384;
+const RESEND_ENDPOINT = 'https://api.resend.com/emails';
+
+function jsonResponse(payload, status = 200, requestId, additionalHeaders = {}) {
+  const headers = {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Cache-Control': 'no-store',
+    'X-Content-Type-Options': 'nosniff',
+    ...additionalHeaders,
+  };
+
+  if (requestId) headers['X-Request-ID'] = requestId;
+
+  return new Response(JSON.stringify(payload), { status, headers });
 }
 
-function normalizeText(value, maxLength) {
-  if (typeof value !== 'string') return '';
-  return value.replace(/\r\n/g, '\n').trim().slice(0, maxLength);
+function requestSizeFromHeader(request) {
+  const rawLength = request.headers.get('content-length');
+  if (!rawLength) return null;
+
+  const parsedLength = Number(rawLength);
+  return Number.isFinite(parsedLength) ? parsedLength : null;
 }
 
-function escapeHtml(value) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
-function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function messages(language) {
-  const pt = String(language || '').toLowerCase().startsWith('pt');
-  return pt
-    ? {
-        method: 'Método não permitido.',
-        contentType: 'Tipo de conteúdo inválido.',
-        body: 'Corpo da requisição inválido.',
-        received: 'Mensagem recebida.',
-        required: 'Preencha todos os campos obrigatórios.',
-        email: 'Informe um endereço de e-mail válido.',
-        session: 'Sessão do formulário inválida.',
-        refresh: 'Atualize a página e tente novamente.',
-        unavailable: 'O serviço de contato não está configurado.',
-        delivery: 'A mensagem não pôde ser entregue.',
-        success: 'Mensagem enviada com sucesso.',
-        notInformed: 'Não informado',
-        emailTitle: 'Nova mensagem pelo site',
-        name: 'Nome',
-        company: 'Empresa',
-        subject: 'Assunto',
-      }
-    : {
-        method: 'Method not allowed.',
-        contentType: 'Invalid content type.',
-        body: 'Invalid request body.',
-        received: 'Message received.',
-        required: 'Complete all required fields.',
-        email: 'Enter a valid email address.',
-        session: 'Invalid form session.',
-        refresh: 'Refresh the page and try again.',
-        unavailable: 'The contact service is not configured.',
-        delivery: 'The message could not be delivered.',
-        success: 'Message sent successfully.',
-        notInformed: 'Not informed',
-        emailTitle: 'New website message',
-        name: 'Name',
-        company: 'Company',
-        subject: 'Subject',
-      };
+function logDeliveryFailure({ requestId, event, upstreamStatus }) {
+  console.error('Contact API delivery failure', {
+    requestId,
+    event,
+    ...(upstreamStatus ? { upstreamStatus } : {}),
+  });
 }
 
 export default {
   async fetch(request) {
+    const requestId = crypto.randomUUID();
     const requestCopy = messages(request.headers.get('accept-language'));
 
     if (request.method !== 'POST') {
-      return jsonResponse({ message: requestCopy.method }, 405);
+      return jsonResponse(
+        { message: requestCopy.method, requestId },
+        405,
+        requestId,
+        { Allow: 'POST' },
+      );
     }
 
     const contentType = request.headers.get('content-type') || '';
-    if (!contentType.includes('application/json')) {
-      return jsonResponse({ message: requestCopy.contentType }, 415);
+    if (!contentType.toLowerCase().includes('application/json')) {
+      return jsonResponse({ message: requestCopy.contentType, requestId }, 415, requestId);
+    }
+
+    const declaredSize = requestSizeFromHeader(request);
+    if (declaredSize !== null && declaredSize > MAX_BODY_BYTES) {
+      return jsonResponse({ message: requestCopy.bodyTooLarge, requestId }, 413, requestId);
+    }
+
+    let rawBody;
+    try {
+      rawBody = await request.text();
+    } catch {
+      return jsonResponse({ message: requestCopy.body, requestId }, 400, requestId);
+    }
+
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
+      return jsonResponse({ message: requestCopy.bodyTooLarge, requestId }, 413, requestId);
     }
 
     let body;
     try {
-      body = await request.json();
+      body = JSON.parse(rawBody);
     } catch {
-      return jsonResponse({ message: requestCopy.body }, 400);
+      return jsonResponse({ message: requestCopy.body, requestId }, 400, requestId);
     }
 
-    const copy = messages(body.language);
-    const name = normalizeText(body.name, 80);
-    const email = normalizeText(body.email, 120).toLowerCase();
-    const company = normalizeText(body.company, 120);
-    const subject = normalizeText(body.subject, 140);
-    const message = normalizeText(body.message, 3000);
-    const website = normalizeText(body.website, 200);
-    const startedAt = Number(body.startedAt);
+    const copy = messages(body?.language);
+    const validation = validateContactPayload(body);
 
-    if (website) return jsonResponse({ message: copy.received });
-    if (!name || !email || !subject || !message) return jsonResponse({ message: copy.required }, 400);
-    if (!isValidEmail(email)) return jsonResponse({ message: copy.email }, 400);
-    if (!Number.isFinite(startedAt)) return jsonResponse({ message: copy.session }, 400);
+    if (!validation.ok) {
+      return jsonResponse({ message: copy[validation.error], requestId }, 400, requestId);
+    }
 
-    const elapsed = Date.now() - startedAt;
-    if (elapsed < 2000 || elapsed > 7200000) return jsonResponse({ message: copy.refresh }, 400);
+    if (validation.spam) {
+      return jsonResponse({ message: copy.received, requestId }, 200, requestId);
+    }
 
     const apiKey = process.env.RESEND_API_KEY;
     const recipient = process.env.CONTACT_TO_EMAIL || 'arleujr30@gmail.com';
     const sender = process.env.CONTACT_FROM_EMAIL || 'Arleu Junior Website <onboarding@resend.dev>';
 
-    if (!apiKey) return jsonResponse({ message: copy.unavailable }, 503);
+    if (!apiKey) {
+      return jsonResponse({ message: copy.unavailable, requestId }, 503, requestId);
+    }
 
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-    const safeCompany = escapeHtml(company || copy.notInformed);
-    const safeSubject = escapeHtml(subject);
-    const safeMessage = escapeHtml(message).replaceAll('\n', '<br>');
-
-    const resendResponse = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': crypto.randomUUID(),
-      },
-      body: JSON.stringify({
-        from: sender,
-        to: [recipient],
-        reply_to: email,
-        subject: `Website contact: ${subject}`,
-        html: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #17211c; max-width: 680px; margin: 0 auto;">
-            <h1 style="font-size: 24px; margin-bottom: 24px;">${copy.emailTitle}</h1>
-            <p><strong>${copy.name}:</strong> ${safeName}</p>
-            <p><strong>Email:</strong> ${safeEmail}</p>
-            <p><strong>${copy.company}:</strong> ${safeCompany}</p>
-            <p><strong>${copy.subject}:</strong> ${safeSubject}</p>
-            <div style="margin-top: 24px; padding: 20px; background: #f3f7f5; border-radius: 12px;">${safeMessage}</div>
-          </div>
-        `,
-        text: `${copy.name}: ${name}\nEmail: ${email}\n${copy.company}: ${company || copy.notInformed}\n${copy.subject}: ${subject}\n\n${message}`,
-      }),
+    const emailPayload = buildEmailPayload({
+      data: validation.data,
+      copy,
+      sender,
+      recipient,
     });
 
-    if (!resendResponse.ok) return jsonResponse({ message: copy.delivery }, 502);
-    return jsonResponse({ message: copy.success }, 200);
+    let resendResponse;
+    try {
+      resendResponse = await globalThis.fetch(RESEND_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': requestId,
+        },
+        body: JSON.stringify(emailPayload),
+      });
+    } catch (error) {
+      logDeliveryFailure({
+        requestId,
+        event: error instanceof Error ? error.name : 'UnknownNetworkError',
+      });
+      return jsonResponse({ message: copy.delivery, requestId }, 502, requestId);
+    }
+
+    if (resendResponse.status === 429) {
+      logDeliveryFailure({ requestId, event: 'UpstreamRateLimit', upstreamStatus: 429 });
+      return jsonResponse(
+        { message: copy.busy, requestId },
+        503,
+        requestId,
+        { 'Retry-After': resendResponse.headers.get('retry-after') || '60' },
+      );
+    }
+
+    if (!resendResponse.ok) {
+      logDeliveryFailure({
+        requestId,
+        event: 'UpstreamDeliveryError',
+        upstreamStatus: resendResponse.status,
+      });
+      return jsonResponse({ message: copy.delivery, requestId }, 502, requestId);
+    }
+
+    return jsonResponse({ message: copy.success, requestId }, 200, requestId);
   },
 };
