@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "node scripts/dev-server.mjs",
     "lint": "node scripts/validate-project.mjs",
     "test": "node --test",
     "test:coverage": "node --test --experimental-test-coverage",
