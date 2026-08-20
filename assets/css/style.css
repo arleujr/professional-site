@@ -512,7 +512,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 28px 0 0;
+  margin: 14px 0 0;
   padding: 0;
   list-style: none;
 }
